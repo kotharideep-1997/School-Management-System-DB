@@ -34,6 +34,25 @@ LOCK TABLES `permissionmaster` WRITE;
 INSERT INTO `permissionmaster` VALUES (1,'string','2026-03-28 18:59:41','2026-03-28 19:01:14',1),(2,'Edit','2026-03-28 18:59:49','2026-03-28 18:59:49',1),(3,'Delete','2026-03-28 18:59:53','2026-03-28 18:59:53',1),(5,'View','2026-03-28 19:02:27','2026-03-28 19:02:27',1),(6,'report','2026-03-28 20:13:06','2026-03-28 20:13:06',1);
 UNLOCK TABLES;
 
+DROP TABLE IF EXISTS `students`;
+CREATE TABLE `students` (
+  `Id` int NOT NULL AUTO_INCREMENT,
+  `FirstName` varchar(40) NOT NULL,
+  `LastName` varchar(40) NOT NULL,
+  `RollNo` int NOT NULL,
+  `Active` tinyint(1) NOT NULL DEFAULT '1',
+  `CreatedDate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `UpdatedDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `ClassId` int DEFAULT NULL,
+  PRIMARY KEY (`Id`),
+  KEY `FK_Students_Class` (`ClassId`),
+  CONSTRAINT `FK_Students_Class` FOREIGN KEY (`ClassId`) REFERENCES `classmaster` (`Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+LOCK TABLES `students` WRITE;
+INSERT INTO `students` VALUES (2,'wdw','dwdwd',45,1,'2026-03-29 00:37:08','2026-03-29 00:37:08',4),(3,'wdw','dwdwd',45,1,'2026-03-29 00:42:31','2026-03-29 00:42:31',4);
+UNLOCK TABLES;
+
 DROP TABLE IF EXISTS `studentattendances`;
 CREATE TABLE `studentattendances` (
   `Id` int NOT NULL AUTO_INCREMENT,
@@ -71,24 +90,7 @@ LOCK TABLES `studentclassmapping` WRITE;
 UNLOCK TABLES;
 
 
-DROP TABLE IF EXISTS `students`;
-CREATE TABLE `students` (
-  `Id` int NOT NULL AUTO_INCREMENT,
-  `FirstName` varchar(40) NOT NULL,
-  `LastName` varchar(40) NOT NULL,
-  `RollNo` int NOT NULL,
-  `Active` tinyint(1) NOT NULL DEFAULT '1',
-  `CreatedDate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `UpdatedDate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `ClassId` int DEFAULT NULL,
-  PRIMARY KEY (`Id`),
-  KEY `FK_Students_Class` (`ClassId`),
-  CONSTRAINT `FK_Students_Class` FOREIGN KEY (`ClassId`) REFERENCES `classmaster` (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-LOCK TABLES `students` WRITE;
-INSERT INTO `students` VALUES (2,'wdw','dwdwd',45,1,'2026-03-29 00:37:08','2026-03-29 00:37:08',4),(3,'wdw','dwdwd',45,1,'2026-03-29 00:42:31','2026-03-29 00:42:31',4);
-UNLOCK TABLES;
 
 
 DROP TABLE IF EXISTS `userpermission`;
