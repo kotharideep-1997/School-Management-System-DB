@@ -91,7 +91,21 @@ UNLOCK TABLES;
 
 
 
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE `users` (
+  `Id` int NOT NULL AUTO_INCREMENT,
+  `UserName` varchar(50) NOT NULL,
+  `PasswordHash` varbinary(256) NOT NULL,
+  `PasswordSalt` varbinary(128) NOT NULL,
+  `CreatedDate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `IsActive` tinyint(1) DEFAULT '1',
+  PRIMARY KEY (`Id`),
+  UNIQUE KEY `UserName` (`UserName`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+LOCK TABLES `users` WRITE;
+INSERT INTO `users` VALUES (1,'Deep',_binary '�\�r1rY��N\�v=\�\�~\��z��ήu�k\�+',_binary '����\�x;yj2^�/','2026-03-28 11:53:58',1),(6,'wdw',_binary '!��Ȼ�\��hH��\�\��)�ݔi�\�\�*�	��#\�',_binary '�H3\�c����@��:\�','2026-03-28 13:01:02',1),(7,'Admin',_binary '�y8���\�AL5  �X\�W\�\�h�f\044��)\�i',_binary '�LX!��a�9�I\����E','2026-03-28 18:06:50',1);
+UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `userpermission`;
 CREATE TABLE `userpermission` (
@@ -113,21 +127,7 @@ INSERT INTO `userpermission` VALUES (1,7,1,1,'2026-03-28 19:44:25','2026-03-28 1
 UNLOCK TABLES;
 
 
-DROP TABLE IF EXISTS `users`;
-CREATE TABLE `users` (
-  `Id` int NOT NULL AUTO_INCREMENT,
-  `UserName` varchar(50) NOT NULL,
-  `PasswordHash` varbinary(256) NOT NULL,
-  `PasswordSalt` varbinary(128) NOT NULL,
-  `CreatedDate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `IsActive` tinyint(1) DEFAULT '1',
-  PRIMARY KEY (`Id`),
-  UNIQUE KEY `UserName` (`UserName`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-LOCK TABLES `users` WRITE;
-INSERT INTO `users` VALUES (1,'Deep',_binary '�\�r1rY��N\�v=\�\�~\��z��ήu�k\�+',_binary '����\�x;yj2^�/','2026-03-28 11:53:58',1),(6,'wdw',_binary '!��Ȼ�\��hH��\�\��)�ݔi�\�\�*�	��#\�',_binary '�H3\�c����@��:\�','2026-03-28 13:01:02',1),(7,'Admin',_binary '�y8���\�AL5  �X\�W\�\�h�f\044��)\�i',_binary '�LX!��a�9�I\����E','2026-03-28 18:06:50',1);
-UNLOCK TABLES;
 
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_Auth_SelectPermissionNamesByUserId`(IN p_UserId INT)
