@@ -1,5 +1,5 @@
-CREATE DATABASE  IF NOT EXISTS `school_managemnet_system` 
-USE `school_managemnet_system`;
+CREATE DATABASE  IF NOT EXISTS `sms` 
+USE `sms`;
 
 DROP TABLE IF EXISTS `classmaster`;
 
